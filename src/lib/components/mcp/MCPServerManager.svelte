@@ -62,16 +62,16 @@
 		<div class="mb-6">
 			<h2 class="mb-1 text-xl font-semibold text-gray-900 dark:text-gray-200">
 				{#if currentView === "list"}
-					MCP Servers
+					MCP 服务器
 				{:else}
-					Add MCP server
+					添加MCP服务器
 				{/if}
 			</h2>
 			<p class="text-sm text-gray-600 dark:text-gray-400">
 				{#if currentView === "list"}
-					Manage MCP servers to extend {publicConfig.PUBLIC_APP_NAME} with external tools.
+					管理MCP服务器以扩展{publicConfig.PUBLIC_APP_NAME}的外部工具。
 				{:else}
-					Add a custom MCP server to {publicConfig.PUBLIC_APP_NAME}.
+					添加自定义MCP服务器到{publicConfig.PUBLIC_APP_NAME}。
 				{/if}
 			</p>
 		</div>
@@ -93,10 +93,10 @@
 					<div>
 						<p class="text-sm font-semibold text-gray-900 dark:text-gray-100">
 							{$allMcpServers.length}
-							{$allMcpServers.length === 1 ? "server" : "servers"} configured
+							{$allMcpServers.length === 1 ? "服务器" : "服务器"} 已配置
 						</p>
 						<p class="text-xs text-gray-600 dark:text-gray-400">
-							{enabledCount} enabled
+							{enabledCount} 已启用
 						</p>
 					</div>
 				</div>
@@ -108,14 +108,14 @@
 						class="btn gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
 					>
 						<IconRefresh class="size-4 {isRefreshing ? 'animate-spin' : ''}" />
-						{isRefreshing ? "Refreshing…" : "Refresh"}
+						{isRefreshing ? "刷新中..." : "刷新"}
 					</button>
 					<button
 						onclick={() => (currentView = "add")}
 						class="btn flex items-center gap-0.5 rounded-lg bg-blue-600 py-1.5 pl-2 pr-3 text-sm font-medium text-white hover:bg-blue-600"
 					>
 						<IconAddLarge class="size-4" />
-						Add Server
+						添加服务器
 					</button>
 				</div>
 			</div>
@@ -124,7 +124,7 @@
 				{#if baseServers.length > 0}
 					<div>
 						<h3 class="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-							Base Servers ({baseServers.length})
+							基础MCP服务器 ({baseServers.length})
 						</h3>
 						<div class="grid grid-cols-1 gap-3 md:grid-cols-2">
 							{#each baseServers as server (server.id)}
@@ -137,7 +137,7 @@
 				<!-- Custom Servers -->
 				<div>
 					<h3 class="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-						Custom Servers ({customServers.length})
+						自定义MCP服务器 ({customServers.length})
 					</h3>
 					{#if customServers.length === 0}
 						<div
@@ -145,17 +145,17 @@
 						>
 							<LucideHammer class="mb-3 size-12 text-gray-400" />
 							<p class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-100">
-								No custom servers yet
+								暂无自定义MCP服务器
 							</p>
 							<p class="mb-4 text-xs text-gray-600 dark:text-gray-400">
-								Add your own MCP servers with custom tools
+								添加自定义MCP服务器以扩展{publicConfig.PUBLIC_APP_NAME}的外部工具。
 							</p>
 							<button
 								onclick={() => (currentView = "add")}
 								class="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
 							>
 								<IconAddLarge class="size-4" />
-								Add Your First Server
+								添加您的第一个MCP服务器
 							</button>
 						</div>
 					{:else}
@@ -169,12 +169,12 @@
 
 				<!-- Help Text -->
 				<div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-700">
-					<h4 class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">💡 Quick Tips</h4>
+					<h4 class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">💡 快速提示</h4>
 					<ul class="space-y-1 text-xs text-gray-600 dark:text-gray-400">
-						<li>• Only connect to servers you trust</li>
-						<li>• Enable servers to make their tools available in chat</li>
-						<li>• Use the Health Check button to verify server connectivity</li>
-						<li>• You can add HTTP headers for authentication when required</li>
+						<li>• 仅连接到您信任的服务器</li>
+						<li>• 启用服务器以使其工具在聊天中可用</li>
+						<li>• 使用健康检查按钮验证服务器连接</li>
+						<li>• 在需要时可以添加HTTP头进行身份验证</li>
 					</ul>
 				</div>
 			</div>

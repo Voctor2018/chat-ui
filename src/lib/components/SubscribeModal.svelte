@@ -31,7 +31,7 @@
 					{/if}
 				</div>
 				<h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-					{$isPro ? "Out of Credits" : "Upgrade Required"}
+					{$isPro ? "积分用完了" : "需要升级"}
 				</h2>
 			</div>
 		</div>
@@ -39,19 +39,17 @@
 		<div class="text-gray-700 dark:text-gray-200">
 			{#if $isPro}
 				<p class="text-[15px] leading-relaxed">
-					You've used all your available credits. Purchase additional credits to continue using
-					HuggingChat.
+					您已用完所有可用积分。请购买额外积分以继续使用HuggingChat。
 				</p>
 				<p class="mt-3 text-[15px] italic leading-relaxed opacity-75">
-					Your credits can be used in other HF services and external apps via Inference Providers.
+					您的积分可以在其他HF服务和外部应用中通过Inference Providers使用。
 				</p>
 			{:else}
 				<p class="text-[15px] leading-relaxed">
-					You've reached your message limit. Upgrade to Hugging Face PRO to continue using
-					HuggingChat.
+					您已达到消息限制。请升级到Hugging Face PRO以继续使用HuggingChat。
 				</p>
 				<p class="mt-3 text-[15px] italic leading-relaxed opacity-75">
-					It's also possible to use your PRO credits in your favorite AI tools.
+					您也可以在您喜欢的AI工具中使用PRO积分。
 				</p>
 			{/if}
 		</div>
@@ -64,7 +62,7 @@
 					rel="noopener noreferrer"
 					class="w-full rounded-xl bg-black px-5 py-2.5 text-center text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
 				>
-					Purchase Credits
+					购买积分
 				</a>
 			{:else}
 				<a
@@ -73,14 +71,14 @@
 					rel="noopener noreferrer"
 					class="w-full rounded-xl bg-black px-5 py-2.5 text-center text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
 				>
-					Upgrade to Pro
+					升级到Pro
 				</a>
 			{/if}
 			<button
 				class="w-full rounded-xl bg-gray-200 px-5 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-300/80 dark:bg-white/5 dark:text-gray-200 dark:hover:bg-white/10"
 				onclick={close}
 			>
-				Maybe later
+				稍后再说
 			</button>
 		</div>
 	</div>

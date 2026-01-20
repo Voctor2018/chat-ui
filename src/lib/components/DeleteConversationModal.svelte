@@ -34,7 +34,7 @@
 	<Modal onclose={close} width="w-[90dvh] md:w-[480px]">
 		<div class="flex w-full flex-col gap-5 p-6">
 			<div class="flex items-start justify-between">
-				<h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Delete conversation</h2>
+				<h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">删除对话</h2>
 				<button type="button" class="group outline-none" onclick={close} aria-label="Close">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +49,7 @@
 			</div>
 
 			<p class="text-sm text-gray-600 dark:text-gray-400">
-				Are you sure you want to delete "<span class="font-semibold">{title}</span>"? This action
-				cannot be undone.
+				您确定要删除 "<span class="font-semibold">{title}</span>" 吗？此操作无法撤销。
 			</p>
 
 			<div class="flex items-center justify-end gap-2">
@@ -59,7 +58,7 @@
 					class="inline-flex items-center rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-900 shadow outline-none hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
 					onclick={close}
 				>
-					Cancel
+					取消
 				</button>
 				<button
 					bind:this={deleteButtonEl}
@@ -67,7 +66,7 @@
 					class="inline-flex items-center rounded-xl border border-red-600 bg-red-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 dark:border-red-500 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-400 dark:focus:ring-offset-gray-800"
 					onclick={confirmDelete}
 				>
-					Delete
+					删除
 				</button>
 			</div>
 		</div>

@@ -14,9 +14,9 @@
 	type="button"
 	onclick={onClick}
 	class={`btn stop-generating-btn ${showBorder ? "stop-generating-btn--spinning" : ""} ${classNames}`}
-	aria-label="Stop generating"
+	aria-label="停止生成"
 >
-	<span class="sr-only">Stop generating</span>
+	<span class="sr-only">停止生成</span>
 	<CarbonStopFilledAlt class="size-3.5 text-gray-500" />
 </button>
 

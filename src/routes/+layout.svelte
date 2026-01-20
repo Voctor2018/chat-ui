@@ -160,7 +160,7 @@
 			});
 		}
 
-		// Global keyboard shortcut: New Chat (Ctrl/Cmd + Shift + O)
+		// Global keyboard shortcut: 新聊天 (Ctrl/Cmd + Shift + O)
 		const onKeydown = (e: KeyboardEvent) => {
 			// Ignore when a modal has focus (app is inert)
 			const appEl = document.getElementById("app");

@@ -56,18 +56,18 @@
 					href="https://huggingface.co/docs/inference-providers"
 					class="ml-auto text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
 					target="_blank"
-					aria-label="Hub discussion about models"
+					aria-label="关于模型的Hub讨论"
 				>
 					<CarbonHelpFilled />
 				</a>
 			{/if}
 		</div>
 		<h2 class="text-gray-500">
-			All models available{#if publicConfig.isHuggingChat}&nbsp;via <a
+			所有可用模型{#if publicConfig.isHuggingChat}&nbsp;通过 <a
 					target="_blank"
 					href="https://huggingface.co/inference/models"
 					class="underline decoration-gray-300 hover:decoration-gray-500 dark:decoration-gray-600 dark:hover:decoration-gray-500"
-					>Inference Providers</a
+					>推理提供者</a
 				>{/if}
 		</h2>
 
@@ -75,8 +75,8 @@
 		<input
 			type="search"
 			bind:value={modelFilter}
-			placeholder="Search by name"
-			aria-label="Search models by name or id"
+			placeholder="按名称搜索"
+			aria-label="按名称或ID搜索模型"
 			class="mt-4 w-full rounded-3xl border border-gray-300 bg-white px-5 py-2 text-[15px]
 				placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300
 				dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-gray-700"
@@ -91,7 +91,7 @@
 					{@const isLast = index === filteredModels.length - 1}
 					<a
 						href="{base}/models/{model.id}"
-						aria-label="Model card for {model.displayName}"
+						aria-label="模型卡片 {model.displayName}"
 						class="group flex cursor-pointer items-center gap-2 p-3 sm:gap-4 sm:p-4
 							{isActive
 							? 'bg-gray-50 dark:bg-gray-800'
@@ -133,9 +133,7 @@
 								{/if}
 							</div>
 							<p class="truncate pr-4 text-xs text-gray-500 dark:text-gray-400 sm:text-[13px]">
-								{model.isRouter
-									? "Routes your messages to the best model for your request."
-									: model.description || "-"}
+								{model.isRouter ? "将您的消息路由到最适合您请求的模型。" : model.description || "-"}
 							</p>
 						</div>
 
@@ -143,7 +141,7 @@
 						<div class="flex flex-shrink-0 items-center gap-1.5">
 							{#if $settings.toolsOverrides?.[model.id] ?? (model as { supportsTools?: boolean }).supportsTools}
 								<div
-									title="This model supports tool calling (functions)."
+									title="此模型支持工具调用（函数）。"
 									class="rounded-md bg-purple-50 p-1.5 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400"
 								>
 									<LucideHammer class="size-3 sm:size-3.5" />
@@ -151,7 +149,7 @@
 							{/if}
 							{#if $settings.multimodalOverrides?.[model.id] ?? model.multimodal}
 								<div
-									title="This model is multimodal and supports image inputs natively."
+									title="此模型是多模态的，支持原生图像输入。"
 									class="rounded-md bg-blue-50 p-1.5 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
 								>
 									<LucideImage class="size-3 sm:size-3.5" />
@@ -159,8 +157,8 @@
 							{/if}
 							<button
 								type="button"
-								title="Model settings"
-								aria-label="Model settings for {model.displayName}"
+								title="模型设置"
+								aria-label="模型设置 {model.displayName}"
 								class="rounded-md border border-gray-200 p-1.5 text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700"
 								onclick={(e) => {
 									e.preventDefault();

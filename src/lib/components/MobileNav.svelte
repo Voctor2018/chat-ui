@@ -46,7 +46,7 @@
 	const drawerWidthPercentage = 85;
 
 	$effect(() => {
-		title ??= "New Chat";
+		title ??= "新聊天";
 	});
 
 	beforeNavigate(() => {

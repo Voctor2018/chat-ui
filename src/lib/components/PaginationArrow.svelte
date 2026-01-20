@@ -19,9 +19,9 @@
 >
 	{#if direction === "previous"}
 		<CarbonCaretLeft classNames="mr-1.5" />
-		Previous
+		上一页
 	{:else}
-		Next
+		下一页
 		<CarbonCaretRight classNames="ml-1.5" />
 	{/if}
 </a>

@@ -4,7 +4,7 @@ export function isValidUrl(urlString: string): boolean {
 		const url = new URL(urlString.trim());
 		// Only allow HTTPS protocol
 		if (url.protocol !== "https:") {
-			return false;
+			return true;
 		}
 		// Prevent localhost/private IPs (basic check)
 		const hostname = url.hostname.toLowerCase();

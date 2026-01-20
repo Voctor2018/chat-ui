@@ -39,22 +39,20 @@
 
 		<div class="text-gray-700 dark:text-gray-200">
 			<p class="text-[15px] leading-relaxed">
-				Welcome to {publicConfig.PUBLIC_APP_NAME}, the chat app powered by open source AI models.
+				欢迎使用{publicConfig.PUBLIC_APP_NAME}，这是一款由开源AI模型提供支持的聊天应用。
 			</p>
 			<p class="mt-3 text-[15px] leading-relaxed">
-				<IconOmni classNames="-translate-y-px" /> Omni automatically picks the best AI model to give
-				you optimal answers depending on your requests.
+				<IconOmni classNames="-translate-y-px" />
+				Omni会根据您的请求自动选择最佳AI模型，为您提供最理想的答案。
 			</p>
-			<p class="mt-3 text-[15px] leading-relaxed">
-				You can also choose from any available open source models to chat with directly.
-			</p>
+			<p class="mt-3 text-[15px] leading-relaxed">您也可以直接选择任何可用的开源模型进行聊天。</p>
 		</div>
 
 		<button
 			class="k w-full rounded-xl bg-black px-5 py-2.5 text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
 			onclick={close}
 		>
-			Start chatting
+			开始聊天
 		</button>
 	</div>
 </Modal>

@@ -31,7 +31,7 @@
 
 		const log = (...args: unknown[]) => {
 			if (dev) {
-				console.log("background generation", ...args);
+				console.log("后台生成", ...args);
 			}
 		};
 
@@ -44,7 +44,7 @@
 			inflight.delete(id);
 			assistantSnapshots.delete(id);
 			failureCounts.delete(id);
-			log("stop", id, reason);
+			log("停止", id, reason);
 		};
 
 		const pollOnce = async (id: string) => {
@@ -53,15 +53,15 @@
 			const entry = backgroundGenerationEntries.find((candidate) => candidate.id === id);
 			if (entry && Date.now() - entry.startedAt > MAX_POLL_DURATION_MS) {
 				removeBackgroundGeneration(id);
-				stopPoller(id, "timed out");
-				log("timeout", id);
+				stopPoller(id, "超时");
+				log("超时", id);
 				await invalidate(UrlDependency.ConversationList);
 				await invalidate(UrlDependency.Conversation);
 				return;
 			}
 
 			inflight.add(id);
-			log("poll", id);
+			log("轮询", id);
 
 			try {
 				const response = await client.conversations({ id }).get({ query: {} });
@@ -107,7 +107,7 @@
 					assistantSnapshots.delete(id);
 					failureCounts.delete(id);
 					shouldInvalidateConversation = true;
-					log("complete", id, hasFinalAnswer ? "final" : "error");
+					log("完成", id, hasFinalAnswer ? "最终回答" : "错误");
 					await invalidate(UrlDependency.ConversationList);
 				}
 
@@ -117,14 +117,14 @@
 
 				failureCounts.delete(id);
 			} catch (err) {
-				console.error("Background generation poll failed", id, err);
+				console.error("后台生成轮询失败", id, err);
 				const failures = (failureCounts.get(id) ?? 0) + 1;
 				failureCounts.set(id, failures);
 				if (failures >= 3) {
 					removeBackgroundGeneration(id);
 					assistantSnapshots.delete(id);
 					failureCounts.delete(id);
-					log("failures", id, failures);
+					log("失败次数过多", id, failures);
 					await invalidate(UrlDependency.ConversationList);
 				}
 			} finally {
@@ -141,7 +141,7 @@
 
 			pollers.set(entry.id, () => clearInterval(intervalId));
 			void pollOnce(entry.id);
-			log("start", entry.id);
+			log("开始", entry.id);
 		};
 
 		$effect(() => {

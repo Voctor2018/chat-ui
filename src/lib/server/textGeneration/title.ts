@@ -12,11 +12,11 @@ export async function* generateTitleForConversation(
 	try {
 		const userMessage = conv.messages.find((m) => m.from === "user");
 		// HACK: detect if the conversation is new
-		if (conv.title !== "New Chat" || !userMessage) return;
+		if (conv.title !== "新聊天" || !userMessage) return;
 
 		const prompt = userMessage.content;
 		const modelForTitle = config.TASK_MODEL?.trim() ? config.TASK_MODEL : conv.model;
-		const title = (await generateTitle(prompt, modelForTitle, locals)) ?? "New Chat";
+		const title = (await generateTitle(prompt, modelForTitle, locals)) ?? "新聊天";
 
 		yield {
 			type: MessageUpdateType.Title,

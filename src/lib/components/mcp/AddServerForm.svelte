@@ -26,7 +26,7 @@
 		initialName = "",
 		initialUrl = "",
 		initialHeaders = [],
-		submitLabel = "Add Server",
+		submitLabel = "添加服务器",
 	}: Props = $props();
 
 	let name = $state(initialName);
@@ -53,7 +53,7 @@
 
 	function validate(): boolean {
 		if (!name.trim()) {
-			error = "Server name is required";
+			error = "MCP服务器名称不能为空";
 			return false;
 		}
 
@@ -64,7 +64,7 @@
 
 		const urlValidation = validateMcpServerUrl(url);
 		if (!urlValidation) {
-			error = "Invalid URL.";
+			error = "无效的URL。";
 			return false;
 		}
 
@@ -74,7 +74,7 @@
 			if (header.key.trim() || header.value.trim()) {
 				const headerError = validateHeader(header.key, header.value);
 				if (headerError) {
-					error = `Header ${i + 1}: ${headerError}`;
+					error = `HTTP头 ${i + 1}: ${headerError}`;
 					return false;
 				}
 			}
@@ -105,13 +105,13 @@
 			for="server-name"
 			class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300"
 		>
-			Server Name <span class="text-red-500">*</span>
+			MCP服务器名称 <span class="text-red-500">*</span>
 		</label>
 		<input
 			id="server-name"
 			type="text"
 			bind:value={name}
-			placeholder="My MCP Server"
+			placeholder="输入MCP服务器名称"
 			class="mt-1.5 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
 		/>
 	</div>
@@ -119,7 +119,7 @@
 	<!-- Server URL -->
 	<div>
 		<label for="server-url" class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-			Server URL <span class="text-red-500">*</span>
+			MCP服务器URL <span class="text-red-500">*</span>
 		</label>
 		<input
 			id="server-url"
@@ -136,17 +136,17 @@
 	<!-- HTTP Headers -->
 	<details class="rounded-lg border border-gray-200 dark:border-gray-700">
 		<summary class="cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-			HTTP Headers (Optional)
+			HTTP头 (可选)
 		</summary>
 		<div class="space-y-2 border-t border-gray-200 p-4 dark:border-gray-700">
 			{#if headers.length === 0}
-				<p class="text-sm text-gray-500 dark:text-gray-400">No headers configured</p>
+				<p class="text-sm text-gray-500 dark:text-gray-400">未配置HTTP头</p>
 			{:else}
 				{#each headers as header, i}
 					<div class="flex gap-2">
 						<input
 							bind:value={header.key}
-							placeholder="Header name (e.g., Authorization)"
+							placeholder="HTTP头名称 (e.g., Authorization)"
 							class="flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
 						/>
 						<div class="relative flex-1">
@@ -175,7 +175,7 @@
 							type="button"
 							onclick={() => removeHeader(i)}
 							class="rounded-lg bg-red-100 p-2 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
-							title="Remove header"
+							title="删除HTTP头"
 						>
 							<IconTrash class="size-4" />
 						</button>
@@ -189,11 +189,11 @@
 				class="flex items-center gap-1.5 rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
 			>
 				<IconAdd class="size-4" />
-				Add Header
+				添加HTTP头
 			</button>
 
 			<p class="text-xs text-gray-500 dark:text-gray-400">
-				Common examples:<br />
+				常用示例:<br />
 				• Bearer token:
 				<code class="rounded bg-gray-100 px-1 dark:bg-gray-700"
 					>Authorization: Bearer YOUR_TOKEN</code
@@ -211,11 +211,10 @@
 		<div class="flex items-start gap-3">
 			<IconWarning class="mt-0.5 size-4 flex-none text-amber-600 dark:text-yellow-300" />
 			<div class="text-sm leading-5">
-				<p class="font-medium">Be careful with custom MCP servers.</p>
+				<p class="font-medium">自定义MCP服务器需谨慎。</p>
 				<p class="mt-1 text-[13px] text-amber-800 dark:text-yellow-100/90">
-					They receive your requests (including conversation context and any headers you add) and
-					can run powerful tools on your behalf. Only add servers you trust and review their source.
-					Never share confidental informations.
+					它们会接收您的请求（包括会话上下文和您添加的任何HTTP头），并 可以在您的 behalf
+					上运行强大的工具。仅添加您信任的服务器，并审查其源代码。 永远不要分享敏感信息。
 				</p>
 			</div>
 		</div>
@@ -237,7 +236,7 @@
 			onclick={oncancel}
 			class="rounded-lg bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
 		>
-			Cancel
+			取消
 		</button>
 		<button
 			type="button"

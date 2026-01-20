@@ -28,7 +28,7 @@
 			errorMsg = null;
 			createdUrl = await createShareLink(page.params.id);
 		} catch (e) {
-			errorMsg = (e as Error).message || "Could not create link";
+			errorMsg = (e as Error).message || "无法创建链接";
 		} finally {
 			creating = false;
 		}
@@ -70,10 +70,8 @@
 			<!-- Header + copy -->
 			{#if createdUrl}
 				<div class="flex items-start justify-between">
-					<div class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-						Public link created
-					</div>
-					<button type="button" class="group" onclick={close} aria-label="Close">
+					<div class="text-xl font-semibold text-gray-800 dark:text-gray-200">公开链接已创建</div>
+					<button type="button" class="group" onclick={close} aria-label="关闭">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 32 32"
@@ -86,15 +84,11 @@
 						</svg>
 					</button>
 				</div>
-				<div class="text-sm text-gray-600 dark:text-gray-400">
-					A public link to your chat has been created.
-				</div>
+				<div class="text-sm text-gray-600 dark:text-gray-400">聊天的公开链接已创建。</div>
 			{:else}
 				<div class="flex items-start justify-between">
-					<div class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-						Share public link to chat
-					</div>
-					<button type="button" class="group" onclick={close} aria-label="Close">
+					<div class="text-xl font-semibold text-gray-800 dark:text-gray-200">分享聊天公开链接</div>
+					<button type="button" class="group" onclick={close} aria-label="关闭">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 32 32"
@@ -108,7 +102,7 @@
 					</button>
 				</div>
 				<div class="text-sm text-gray-600 dark:text-gray-400">
-					Any messages you add after sharing stay private.
+					分享后添加的任何消息都将保持私密。
 				</div>
 			{/if}
 
@@ -146,7 +140,7 @@
 							<span class="inline-flex items-center gap-1.5">
 								{#if justCopied}
 									<CarbonCheckmark class="text-[.95em] text-green-600 dark:text-green-400" />
-									Copied
+									已复制
 								{:else}
 									<!-- Use the copy icon provided by CopyToClipBoardBtn default otherwise -->
 									<svg width="1em" height="1em" viewBox="0 0 32 32" class="text-[.95em]"
@@ -155,7 +149,7 @@
 											d="M28 10v18H10V10zm-2 2H12v14h14zm-4-8v2H6v14H4V4z"
 										/></svg
 									>
-									Copy link
+									复制链接
 								{/if}
 							</span>
 						{/snippet}
@@ -169,10 +163,10 @@
 					>
 						{#if creating}
 							<EosIconsLoading class="text-[1.05em]" />
-							Creating…
+							创建中…
 						{:else}
 							<CarbonLink class="text-[1.05em]" />
-							Create link
+							创建链接
 						{/if}
 					</button>
 				{/if}

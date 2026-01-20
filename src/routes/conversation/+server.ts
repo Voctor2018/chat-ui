@@ -1,15 +1,16 @@
-import type { RequestHandler } from "./$types";
-import { collections } from "$lib/server/database";
-import { ObjectId } from "mongodb";
 import { error, redirect } from "@sveltejs/kit";
-import { base } from "$app/paths";
-import { z } from "zod";
-import type { Message } from "$lib/types/Message";
 import { models, validateModel } from "$lib/server/models";
-import { v4 } from "uuid";
-import { authCondition } from "$lib/server/auth";
-import { usageLimits } from "$lib/server/usageLimits";
+
+import type { Message } from "$lib/types/Message";
 import { MetricsServer } from "$lib/server/metrics";
+import { ObjectId } from "mongodb";
+import type { RequestHandler } from "./$types";
+import { authCondition } from "$lib/server/auth";
+import { base } from "$app/paths";
+import { collections } from "$lib/server/database";
+import { usageLimits } from "$lib/server/usageLimits";
+import { v4 } from "uuid";
+import { z } from "zod";
 
 export const POST: RequestHandler = async ({ locals, request }) => {
 	const body = await request.text();
@@ -86,7 +87,7 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 	const res = await collections.conversations.insertOne({
 		_id: new ObjectId(),
 		// Always store sanitized titles
-		title: (title || "New Chat").replace(/<\/?think>/gi, "").trim(),
+		title: (title || "新聊天").replace(/<\/?think>/gi, "").trim(),
 		rootMessageId,
 		messages,
 		model: values.model,

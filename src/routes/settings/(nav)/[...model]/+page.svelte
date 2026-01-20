@@ -127,7 +127,7 @@
 			}}
 		>
 			<CarbonChat class="mr-1.5 text-sm" />
-			New chat
+			新聊天
 		</button>
 
 		{#if model.modelUrl}
@@ -138,7 +138,7 @@
 				class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-1 text-sm hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700/60"
 			>
 				<CarbonArrowUpRight class="mr-1.5 shrink-0 text-xs " />
-				Model page
+				模型页面
 			</a>
 		{/if}
 
@@ -150,7 +150,7 @@
 				class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-1 text-sm hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700/60"
 			>
 				<CarbonArrowUpRight class="mr-1.5 shrink-0 text-xs " />
-				Dataset page
+				数据集页面
 			</a>
 		{/if}
 
@@ -162,7 +162,7 @@
 				rel="noreferrer"
 			>
 				<CarbonArrowUpRight class="mr-1.5 shrink-0 text-xs " />
-				Model website
+				模型网站
 			</a>
 		{/if}
 
@@ -175,7 +175,7 @@
 					class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-1 text-sm hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700/60"
 				>
 					<CarbonCode class="mr-1.5 shrink-0 text-xs" />
-					API Playground
+					API 演示场
 				</a>
 				<a
 					href={"https://huggingface.co/" + model.name}
@@ -184,7 +184,7 @@
 					class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-1 text-sm hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700/60"
 				>
 					<CarbonArrowUpRight class="mr-1.5 shrink-0 text-xs" />
-					View model card
+					查看模型卡片
 				</a>
 			{/if}
 			<CopyToClipBoardBtn
@@ -192,7 +192,7 @@
 				classNames="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-1 text-sm hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700/60"
 			>
 				<div class="flex items-center gap-1.5">
-					<CarbonCopy class="shrink-0 text-xs" />Copy direct link
+					<CarbonCopy class="shrink-0 text-xs" />复制直接链接
 				</div>
 			</CopyToClipBoardBtn>
 		{/if}
@@ -201,12 +201,11 @@
 	<div class="relative flex w-full flex-col gap-2">
 		{#if model?.isRouter}
 			<p class="mb-3 mt-2 rounded-lg bg-gray-100 px-3 py-2 text-sm dark:bg-white/5">
-				<IconOmni classNames="-translate-y-px" /> Omni routes your messages to the best underlying model
-				depending on your request.
+				<IconOmni classNames="-translate-y-px" /> Omni 会根据您的请求将消息路由到最佳的底层模型。
 			</p>
 		{/if}
 		<div class="flex w-full flex-row content-between">
-			<h3 class="mb-1 text-[15px] font-semibold text-gray-800 dark:text-gray-200">System Prompt</h3>
+			<h3 class="mb-1 text-[15px] font-semibold text-gray-800 dark:text-gray-200">系统提示</h3>
 			{#if hasCustomPreprompt}
 				<button
 					class="ml-auto text-xs underline decoration-gray-300 hover:decoration-gray-700 dark:decoration-gray-700 dark:hover:decoration-gray-400"
@@ -218,7 +217,7 @@
 						}));
 					}}
 				>
-					Reset
+					重置
 				</button>
 			{/if}
 		</div>
@@ -237,10 +236,10 @@
 				<div class="flex items-start justify-between py-3">
 					<div>
 						<div class="text-[13px] font-medium text-gray-800 dark:text-gray-200">
-							Tool calling (functions)
+							工具调用（函数）
 						</div>
 						<p class="text-[12px] text-gray-500 dark:text-gray-400">
-							Enable tools and allow the model to call them in chat.
+							启用工具并允许模型在聊天中调用它们。
 						</p>
 					</div>
 					<Switch name="forceTools" bind:checked={getToolsOverride, setToolsOverride} />
@@ -249,10 +248,10 @@
 				<div class="flex items-start justify-between py-3">
 					<div>
 						<div class="text-[13px] font-medium text-gray-800 dark:text-gray-200">
-							Multimodal support (image inputs)
+							多模态支持（图像输入）
 						</div>
 						<p class="text-[12px] text-gray-500 dark:text-gray-400">
-							Enable image uploads and send images to this model.
+							启用图像上传并向该模型发送图像。
 						</p>
 					</div>
 					<Switch
@@ -265,10 +264,10 @@
 					<div class="flex items-start justify-between py-3">
 						<div>
 							<div class="text-[13px] font-medium text-gray-800 dark:text-gray-200">
-								Hide prompt examples
+								隐藏提示示例
 							</div>
 							<p class="text-[12px] text-gray-500 dark:text-gray-400">
-								Hide the prompt suggestions above the chat input.
+								隐藏聊天输入上方的提示建议。
 							</p>
 						</div>
 						<Switch
@@ -285,15 +284,13 @@
 				class="mt-3 flex flex-col gap-2.5 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm dark:border-gray-700 dark:bg-gray-800"
 			>
 				<div>
-					<div class="text-[13px] font-medium text-gray-800 dark:text-gray-200">
-						Inference Providers
-					</div>
+					<div class="text-[13px] font-medium text-gray-800 dark:text-gray-200">推理提供商</div>
 					<p class="text-[12px] text-gray-500 dark:text-gray-400">
-						Providers serving this model. You can enable/disable some providers from <a
+						提供该模型服务的提供商。您可以从<a
 							class="underline decoration-gray-400 hover:decoration-gray-700 dark:decoration-gray-500 dark:hover:decoration-gray-500"
 							target="_blank"
-							href="https://huggingface.co/settings/inference-providers/settings">your settings</a
-						>.
+							href="https://huggingface.co/settings/inference-providers/settings">您的设置</a
+						>中启用/禁用某些提供商。
 					</p>
 				</div>
 				<ul class="mb-0.5 flex flex-wrap gap-2">

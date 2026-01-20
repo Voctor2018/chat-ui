@@ -626,10 +626,10 @@
 						class:paste-glow={pastedLongContent}
 					>
 						{#if lastIsError}
-							<ChatInput value="Sorry, something went wrong. Please try again." disabled={true} />
+							<ChatInput value="抱歉，出现问题。请再试一次。" disabled={true} />
 						{:else}
 							<ChatInput
-								placeholder={isReadOnly ? "This conversation is read-only." : "Ask anything"}
+								placeholder={isReadOnly ? "当前会话只读" : "问任何事情..."}
 								{loading}
 								bind:value={draft}
 								bind:files
@@ -658,7 +658,7 @@
 									onclick={() => {
 										isRecording = true;
 									}}
-									aria-label="Start voice recording"
+									aria-label="开始语音记录"
 								>
 									<IconMic class="size-4" />
 								</button>
@@ -670,7 +670,7 @@
 									: '!bg-black !text-white dark:!bg-white dark:!text-black'}"
 								disabled={!draft || isReadOnly}
 								type="submit"
-								aria-label="Send message"
+								aria-label="发送消息"
 								name="submit"
 							>
 								<IconArrowUp />
@@ -689,7 +689,7 @@
 					{#if loading && streamingToolCallName}
 						<span class="inline-flex items-center gap-1 whitespace-nowrap text-xs">
 							<LucideHammer class="size-3" />
-							Calling tool
+							调用工具：
 							<span class="loading-dots font-medium">
 								{availableTools.find((t) => t.name === streamingToolCallName)?.displayName ??
 									streamingToolCallName}
@@ -709,7 +709,7 @@
 								<IconOmni />
 								{currentModel.displayName}
 							{:else}
-								Model: {currentModel.displayName}
+								模型: {currentModel.displayName}
 							{/if}
 							<CarbonCaretDown class="-ml-0.5 text-xxs" />
 						</a>
@@ -734,7 +734,7 @@
 							class="loading-dots relative inline-flex items-center text-gray-400 dark:text-gray-400"
 							aria-label="Routing…"
 						>
-							<IconOmni classNames="text-xs animate-pulse mr-1" /> Routing
+							<IconOmni classNames="text-xs animate-pulse mr-1" /> 跳转中…
 						</div>
 					{/if}
 				{:else}
@@ -743,7 +743,7 @@
 					</span>
 				{/if}
 				{#if !messages.length && !loading}
-					<span>Generated content may be inaccurate or false.</span>
+					<span>生成内容可能不准确或错误。</span>
 				{/if}
 			</div>
 		</div>

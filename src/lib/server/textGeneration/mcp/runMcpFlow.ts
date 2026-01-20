@@ -173,7 +173,7 @@ export async function* runMcpFlow({
 	}
 	logger.debug(
 		{ count: servers.length, servers: servers.map((s) => s.name) },
-		"[mcp] servers configured"
+		"[mcp] 服务器已配置"
 	);
 	if (servers.length === 0) {
 		return false;
@@ -190,13 +190,10 @@ export async function* runMcpFlow({
 				forceTools: Boolean(forceTools),
 				toolsEnabled,
 			},
-			"[mcp] tools gate evaluation"
+			"[mcp] 工具门评估"
 		);
 		if (!toolsEnabled) {
-			logger.info(
-				{ model: model.id ?? model.name },
-				"[mcp] tools disabled for model; skipping MCP flow"
-			);
+			logger.info({ model: model.id ?? model.name }, "[mcp] 模型不支持工具；跳过 MCP 流程");
 			return false;
 		}
 	} catch {
@@ -238,11 +235,11 @@ export async function* runMcpFlow({
 	try {
 		logger.info(
 			{ toolCount: oaTools.length, toolNames: oaTools.map((t) => t.function.name) },
-			"[mcp] openai tool defs built"
+			"[mcp] OpenAI 工具定义已构建"
 		);
 	} catch {}
 	if (oaTools.length === 0) {
-		logger.warn({}, "[mcp] zero tools available after listing; skipping MCP flow");
+		logger.warn({}, "[mcp] 从 MCP 服务器获取的 OpenAI 工具定义为空；跳过 MCP 流程");
 		return false;
 	}
 
@@ -283,7 +280,7 @@ export async function* runMcpFlow({
 				toolCount: oaTools.length,
 				hasUserToken: Boolean((locals as unknown as { token?: string })?.token),
 			},
-			"[mcp] starting completion with tools"
+			"[mcp] 开始使用工具完成"
 		);
 		let messagesOpenAI: ChatCompletionMessageParam[] = await prepareMessagesWithFiles(
 			messages,
@@ -391,10 +388,7 @@ export async function* runMcpFlow({
 				route: resolvedRoute,
 				model: candidateModelId,
 			};
-			logger.debug(
-				{ route: resolvedRoute, model: candidateModelId },
-				"[mcp] router metadata emitted"
-			);
+			logger.debug({ route: resolvedRoute, model: candidateModelId }, "[mcp] 路由元数据已发送");
 		}
 
 		for (let loop = 0; loop < 10; loop += 1) {
@@ -426,7 +420,7 @@ export async function* runMcpFlow({
 					model: "",
 					provider: providerHeader as unknown as import("@huggingface/inference").InferenceProvider,
 				};
-				logger.debug({ provider: providerHeader }, "[mcp] provider metadata emitted");
+				logger.debug({ provider: providerHeader }, "[mcp] 提供程序元数据已发送");
 			}
 
 			const toolCallState: Record<number, { id?: string; name?: string; arguments: string }> = {};
@@ -464,7 +458,7 @@ export async function* runMcpFlow({
 								];
 							logger.info(
 								{ firstCallName: first?.name, hasId: Boolean(first?.id) },
-								"[mcp] observed streamed tool_call delta"
+								"[mcp] 已观察到流式工具调用增量"
 							);
 							firstToolDeltaLogged = true;
 						} catch {}
@@ -529,7 +523,7 @@ export async function* runMcpFlow({
 			}
 			logger.info(
 				{ sawToolCalls: Object.keys(toolCallState).length > 0, tokens: tokenCount, loop },
-				"[mcp] completion stream closed"
+				"[mcp] 完成流已关闭"
 			);
 
 			if (Object.keys(toolCallState).length > 0) {
@@ -537,10 +531,7 @@ export async function* runMcpFlow({
 				const missingId = Object.values(toolCallState).some((c) => c?.name && !c?.id);
 				let calls: NormalizedToolCall[];
 				if (missingId) {
-					logger.debug(
-						{ loop },
-						"[mcp] missing tool_call id in stream; retrying non-stream to recover ids"
-					);
+					logger.debug({ loop }, "[mcp] 流式工具调用增量中缺少工具调用 ID；重试非流式以恢复 ID");
 					const nonStream = await openai.chat.completions.create(
 						{ ...completionBase, messages: messagesOpenAI, stream: false },
 						{
@@ -612,10 +603,7 @@ export async function* runMcpFlow({
 						];
 						toolMsgCount = event.summary.toolMessages?.length ?? 0;
 						toolRunCount = event.summary.toolRuns?.length ?? 0;
-						logger.info(
-							{ toolMsgCount, toolRunCount },
-							"[mcp] tools executed; continuing loop for follow-up completion"
-						);
+						logger.info({ toolMsgCount, toolRunCount }, "[mcp] 工具已执行；继续循环以获取后续完成");
 					}
 				}
 				// Continue loop: next iteration will use tool messages to get the final content
@@ -638,11 +626,11 @@ export async function* runMcpFlow({
 			};
 			logger.info(
 				{ length: lastAssistantContent.length, loop },
-				"[mcp] final answer emitted (no tool_calls)"
+				"[mcp] 最终答案已发出（无工具调用）"
 			);
 			return true;
 		}
-		logger.warn({}, "[mcp] exceeded tool-followup loops; falling back");
+		logger.warn({}, "[mcp] 超过工具跟进循环次数；回退到默认端点");
 	} catch (err) {
 		const msg = String(err ?? "");
 		const isAbort =
@@ -652,10 +640,10 @@ export async function* runMcpFlow({
 			msg.includes("Request was aborted");
 		if (isAbort) {
 			// Expected on user stop; keep logs quiet and do not treat as error
-			logger.debug({}, "[mcp] aborted by user");
+			logger.debug({}, "[mcp] 已由用户中止");
 			return false;
 		}
-		logger.warn({ err: msg }, "[mcp] flow failed, falling back to default endpoint");
+		logger.warn({ err: msg }, "[mcp] 流程失败，回退到默认端点");
 	} finally {
 		// ensure MCP clients are closed after the turn
 		await drainPool();

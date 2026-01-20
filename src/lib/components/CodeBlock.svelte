@@ -20,7 +20,7 @@
 		const withoutBOM = input.replace(/^\uFEFF/, "");
 		const trimmed = withoutBOM.trimStart();
 		// Strict HTML5 doctype: <!doctype html> with optional whitespace before >
-		return /^<!doctype\s+html\s*>/i.test(trimmed);
+		return /^<!doctype\s+html\s*>$/i.test(trimmed);
 	}
 
 	function isSvgDocument(input: string): boolean {
@@ -45,15 +45,15 @@
 							previewOpen = true;
 						}
 					}}
-					title="Preview HTML"
-					aria-label="Preview HTML"
+					title="预览HTML"
+					aria-label="预览HTML"
 				>
 					{#if loading}
 						<EosIconsLoading class="size-3.5" />
 					{:else}
 						<PlayFilledAlt class="size-3.5" />
 					{/if}
-					Preview
+					预览
 				</button>
 			{/if}
 			<CopyToClipBoardBtn

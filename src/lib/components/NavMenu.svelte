@@ -1,9 +1,9 @@
 <script lang="ts" module>
 	export const titles: { [key: string]: string } = {
-		today: "Today",
-		week: "This week",
-		month: "This month",
-		older: "Older",
+		today: "今天",
+		week: "本周",
+		month: "本月",
+		older: "更早",
 	} as const;
 </script>
 
@@ -145,7 +145,7 @@
 		class="flex rounded-lg border bg-white px-2 py-0.5 text-center shadow-sm hover:shadow-none dark:border-gray-600 dark:bg-gray-700 sm:text-smd"
 		title="Ctrl/Cmd + Shift + O"
 	>
-		New Chat
+		新聊天
 	</a>
 </div>
 
@@ -188,7 +188,7 @@
 					class="ml-auto flex h-[20px] items-center gap-1 rounded-md bg-gradient-to-r from-pink-500/10 via-green-500/10 to-green-500/5 px-1.5 py-0.5 text-xs text-gray-500 hover:from-pink-500/20 hover:via-green-500/20 dark:from-pink-500/20 dark:via-green-500/20 dark:to-green-500/10 dark:text-gray-400 dark:hover:from-pink-500/30 dark:hover:via-green-500/30"
 				>
 					<IconPro />
-					Get PRO
+					获取PRO
 				</a>
 			{:else if publicConfig.isHuggingChat && $isPro === true}
 				<span
@@ -201,7 +201,7 @@
 
 			<img
 				src="https://huggingface.co/api/users/{user.username}/avatar?redirect=true"
-				class="{!(publicConfig.isHuggingChat && $isPro !== null)
+				class="{publicConfig.isHuggingChat && $isPro !== null
 					? 'ml-auto'
 					: ''} size-4 rounded-full border bg-gray-500 dark:border-white/40"
 				alt=""
@@ -213,7 +213,7 @@
 		class="flex h-9 flex-none items-center gap-1.5 rounded-lg pl-2.5 pr-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
 		onclick={handleNavItemClick}
 	>
-		Models
+		模型
 		<span
 			class="ml-auto rounded-md bg-gray-500/5 px-1.5 py-0.5 text-xs text-gray-400 dark:bg-gray-500/20 dark:text-gray-400"
 			>{nModels}</span
@@ -225,7 +225,7 @@
 			onclick={() => (showMcpModal = true)}
 			class="flex h-9 flex-none items-center gap-1.5 rounded-lg pl-2.5 pr-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
 		>
-			MCP Servers
+			MCP服务器
 			{#if $enabledServersCount > 0}
 				<span
 					class="ml-auto rounded-md bg-blue-600/10 px-1.5 py-0.5 text-xs text-blue-600 dark:bg-blue-600/20 dark:text-blue-400"
@@ -242,13 +242,13 @@
 			class="flex h-9 flex-none flex-grow items-center gap-1.5 rounded-lg pl-2.5 pr-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
 			onclick={handleNavItemClick}
 		>
-			Settings
+			设置
 		</a>
 		<button
 			onclick={() => {
 				switchTheme();
 			}}
-			aria-label="Toggle theme"
+			aria-label="切换主题"
 			class="flex size-9 min-w-[1.5em] flex-none items-center justify-center rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
 		>
 			{#if browser}

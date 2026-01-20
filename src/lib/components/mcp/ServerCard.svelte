@@ -28,21 +28,21 @@
 		switch (server.status) {
 			case "connected":
 				return {
-					label: "Connected",
+					label: "已连接",
 					color: "text-green-600 dark:text-green-400",
 					bgColor: "bg-green-100 dark:bg-green-900/20",
 					icon: IconCheckmark,
 				};
 			case "connecting":
 				return {
-					label: "Connecting...",
+					label: "连接中...",
 					color: "text-blue-600 dark:text-blue-400",
 					bgColor: "bg-blue-100 dark:bg-blue-900/20",
 					icon: IconPending,
 				};
 			case "error":
 				return {
-					label: "Error",
+					label: "连接错误",
 					color: "text-red-600 dark:text-red-400",
 					bgColor: "bg-red-100 dark:bg-red-900/20",
 					icon: IconWarning,
@@ -50,7 +50,7 @@
 			case "disconnected":
 			default:
 				return {
-					label: "Unknown",
+					label: "未知",
 					color: "text-gray-600 dark:text-gray-400",
 					bgColor: "bg-gray-100 dark:bg-gray-700",
 					icon: IconPending,
@@ -154,7 +154,7 @@
 				class="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2.5 py-[.29rem] text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
 			>
 				<IconRefresh class="size-3 {isLoadingHealth ? 'animate-spin' : ''}" />
-				Health Check
+				检查健康状态
 			</button>
 
 			{#if isHfMcp}
@@ -166,7 +166,7 @@
 					aria-label="Open Hugging Face MCP settings"
 				>
 					<IconSettings class="size-3" />
-					Settings
+					设置
 				</a>
 			{/if}
 
@@ -176,7 +176,7 @@
 					class="flex items-center gap-1.5 rounded-lg border border-red-500/15 bg-red-50 px-2.5 py-[.29rem] text-xs font-medium text-red-600 hover:bg-red-100 dark:border-red-500/25 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
 				>
 					<IconTrash class="size-3" />
-					Delete
+					删除
 				</button>
 			{/if}
 		</div>
@@ -185,7 +185,7 @@
 		{#if server.tools && server.tools.length > 0}
 			<details class="mt-3">
 				<summary class="cursor-pointer text-xs font-medium text-gray-700 dark:text-gray-300">
-					Available Tools ({server.tools.length})
+					可用工具 ({server.tools.length})
 				</summary>
 				<ul class="mt-2 space-y-1 text-xs">
 					{#each server.tools as tool}
