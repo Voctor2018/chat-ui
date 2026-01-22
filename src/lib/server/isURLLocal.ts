@@ -1,4 +1,5 @@
-import { Address6, Address4 } from "ip-address";
+import { Address4, Address6 } from "ip-address";
+
 import dns from "node:dns";
 import { isIP } from "node:net";
 

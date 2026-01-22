@@ -1,7 +1,7 @@
 import adapter from "@sveltejs/adapter-node";
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
 import { execSync } from "child_process";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 dotenv.config({ path: "./.env.local", override: true });
 dotenv.config({ path: "./.env" });

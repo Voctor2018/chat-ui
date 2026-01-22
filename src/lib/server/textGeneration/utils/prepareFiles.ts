@@ -1,5 +1,5 @@
-import type { MessageFile } from "$lib/types/Message";
 import type { EndpointMessage } from "$lib/server/endpoints/endpoints";
+import type { MessageFile } from "$lib/types/Message";
 import type { OpenAI } from "openai";
 import { TEXT_MIME_ALLOWLIST } from "$lib/constants/mime";
 import type { makeImageProcessor } from "$lib/server/endpoints/images";
@@ -64,13 +64,17 @@ async function prepareFiles(
 	let imageParts: OpenAI.Chat.Completions.ChatCompletionContentPartImage[] = [];
 	if (isMultimodal && imageFiles.length > 0) {
 		const processedFiles = await Promise.all(imageFiles.map(imageProcessor));
-		imageParts = processedFiles.map((file) => ({
-			type: "image_url" as const,
-			image_url: {
-				url: `data:${file.mime};base64,${file.image.toString("base64")}`,
-				detail: "auto",
-			},
-		}));
+		imageParts = processedFiles.map((file) => {
+			const imagePart: OpenAI.Chat.Completions.ChatCompletionContentPartImage = {
+				type: "image_url",
+				image_url: {
+					url: `data:${file.mime};base64,${file.image.toString("base64")}`,
+					detail: "auto",
+				},
+			};
+			// console.log("Processed image part:", imagePart);
+			return imagePart;
+		});
 	}
 
 	let textContent = "";
