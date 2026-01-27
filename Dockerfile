@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG INCLUDE_DB=false
 
-FROM node:24-slim AS base
+FROM node:24 AS base
 
 # install dotenv-cli
 RUN npm install -g dotenv-cli
@@ -21,7 +21,22 @@ RUN touch /app/.env.local
 
 USER root
 RUN apt-get update
-RUN apt-get install -y libgomp1 libcurl4 curl dnsutils nano
+RUN apt-get update && apt-get install -y \
+    libgomp1 \
+    libcurl4 \
+    curl \
+    dnsutils \
+    nano \
+    fontconfig \
+    libfontconfig1 \
+    libfreetype6 \
+    libglib2.0-0 \
+    libpng16-16 \
+    libharfbuzz0b \
+    libjpeg62-turbo \
+    fonts-noto-color-emoji \
+    fonts-liberation \
+    && rm -rf /var/lib/apt/lists/*
 
 # ensure npm cache dir exists before adjusting ownership
 RUN mkdir -p /home/user/.npm && chown -R 1000:1000 /home/user/.npm
@@ -89,5 +104,8 @@ ENV BODY_SIZE_LIMIT=15728640
 #import the build & dependencies
 COPY --from=builder --chown=1000 /app/build /app/build
 COPY --from=builder --chown=1000 /app/node_modules /app/node_modules
+COPY --from=builder --chown=1000:1000 /app/package.json /app/package.json
+COPY --from=builder --chown=1000:1000 /app/package-lock.json /app/package-lock.json
 
+RUN npm install --omit=dev
 CMD ["/bin/bash", "-c", "/app/entrypoint.sh"]
